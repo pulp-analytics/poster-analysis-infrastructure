@@ -1,0 +1,20 @@
+name: tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  unittest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      # No dependencies to install: the tests use the stdlib only, and the
+      # merge_shards.py npz cases self-skip without numpy. This matches the
+      # bare python:3.12-slim the Docker images build on.
+      - name: Run unit tests
+        run: python3 -m unittest discover -s tests -v

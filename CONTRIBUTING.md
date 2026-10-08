@@ -2,6 +2,19 @@
 
 Thanks for your interest in contributing.
 
+## Before you run anything against AWS
+
+This repo exists partly because of a real four-figure billing incident
+(see [docs/COST_SAFETY.md](docs/COST_SAFETY.md)). Before launching any
+cost-bearing resource — EC2, Fargate, Batch, Bedrock, Rekognition,
+Comprehend — run the pre-flight account check first:
+
+```bash
+AWS_PROFILE=<profile> PERSONAL_ACCOUNT_ID=<your account id> bash scripts/preflight_check.sh
+```
+
+Confirm it reports the account you expect before continuing.
+
 ## How to contribute
 
 1. Fork the repo and create your branch from `main`.
