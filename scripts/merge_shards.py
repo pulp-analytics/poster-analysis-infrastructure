@@ -55,22 +55,30 @@ from pathlib import Path
 
 
 def merge_csv(shard_paths: list[Path], out_path: Path) -> int:
-    fieldnames: list[str] | None = None
-    rows: list[dict] = []
-    for p in shard_paths:
-        with p.open(newline="", encoding="utf-8") as f:
-            reader = csv.DictReader(f)
-            if fieldnames is None:
-                fieldnames = reader.fieldnames
-            elif reader.fieldnames != fieldnames:
-                raise ValueError(f"{p} has fieldnames {reader.fieldnames}, expected {fieldnames}")
-            rows.extend(reader)
+    # Stream each shard straight to the output rather than accumulating every
+    # row in memory first -- at full 145k-row scale (and especially the wider
+    # metrics-pipeline CSVs) holding the whole corpus in a list is needless
+    # peak memory. The writer is opened lazily, only after the first shard's
+    # header is read, so fieldnames are known before the header row is written
+    # and a crashed first shard can't leave a half-written output behind.
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    with out_path.open("w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=fieldnames or [])
-        w.writeheader()
-        w.writerows(rows)
-    return len(rows)
+    fieldnames: list[str] | None = None
+    writer: csv.DictWriter | None = None
+    n = 0
+    with out_path.open("w", newline="", encoding="utf-8") as f_out:
+        for p in shard_paths:
+            with p.open(newline="", encoding="utf-8") as f_in:
+                reader = csv.DictReader(f_in)
+                if fieldnames is None:
+                    fieldnames = reader.fieldnames
+                    writer = csv.DictWriter(f_out, fieldnames=fieldnames or [])
+                    writer.writeheader()
+                elif reader.fieldnames != fieldnames:
+                    raise ValueError(f"{p} has fieldnames {reader.fieldnames}, expected {fieldnames}")
+                for row in reader:
+                    writer.writerow(row)
+                    n += 1
+    return n
 
 
 def merge_json(shard_paths: list[Path], out_path: Path) -> int:

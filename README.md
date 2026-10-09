@@ -102,7 +102,26 @@ docs/
                                 dependency graphs, and why sharding
                                 applies to some scripts and not others
   COST_SAFETY.md               the real billing incident, and what's monitored
+tests/
+  test_merge_shards.py         merge_shards.py's happy paths + the
+                                partial-result/overlap guards that keep a
+                                crashed shard from silently corrupting the
+                                merged corpus
+  test_prepare_metrics_input.py  the year-derivation + drop-vs-placeholder
+                                behavior of the schema adapter
 ```
+
+## Tests
+
+Pure-stdlib `unittest`, no third-party deps — they run in the same bare
+`python:3.12-slim` the images are built on:
+
+```bash
+python3 -m unittest discover -s tests -v
+```
+
+The `merge_shards.py` npz cases self-skip when numpy isn't installed (only
+the metrics image has it); everything else runs anywhere.
 
 ## Quickstart
 
@@ -138,8 +157,12 @@ aws s3 cp /tmp/adult_tconsts_isadult1.csv.gz s3://<your-bucket>/<your-key>
 #    (see iam/fargate_task_role_policy.json); pass the bucket/key below.
 
 # 6. start an execution -- shardCount controls how many parallel Batch
-#    array children run per shardable stage (02,03,04,05,06,09,10, and now
-#    16 -- see docs/ARCHITECTURE.md's note on this list's staleness);
+#    array children run per shardable stage. As actually wired in
+#    statemachine/validate_corpus.asl.json today, those stages are scripts
+#    02,03,04,05,06,07,08,10,16 (the ones that loop over every row); 01,09,
+#    11,12,13,14 run as single Fargate tasks. (docs/ARCHITECTURE.md's prose
+#    still uses the pre-renumbering 02-06 numbering -- trust the ASL and
+#    this list over it.)
 #    shardDir
 #    is a scratch subdirectory on the shared EFS mount for shard files
 #    before they're merged. Every *Path field below is where that gate's
@@ -199,9 +222,14 @@ isolation of its own.
 
 For a full 145k-row run, `shardCount` is the main lever: more shards means
 more concurrent Batch array children, bounded in practice by Bedrock/TMDB
-rate limits rather than infrastructure — see docs/ARCHITECTURE.md for why
-`02`/`03`/`04`/`05`/`06` are the ones that benefit from this and `07`/`08`/`09`
-don't need it.
+rate limits rather than infrastructure. The scripts that benefit (every
+one that loops over the whole corpus a row at a time) run as Batch array
+jobs — `02`/`03`/`04`/`05`/`06`/`07`/`08`/`10`/`16` as wired today; the
+ones that only touch a small candidate set or do a single bounded pass
+(`09`/`11`/`12`/`13`/`14`) run as single Fargate tasks. See
+docs/ARCHITECTURE.md for the reasoning behind that split (its prose still
+uses the old pre-renumbering 02-06 numbering, but the shape of the
+argument is unchanged).
 
 ### Then, compute_metrics — steps 1-4 above are shared; step 5 differs
 
