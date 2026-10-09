@@ -56,6 +56,30 @@ class MergeCsvTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             merge_shards.merge_csv([a, b], self.dir / "merged.csv")
 
+    def test_streams_many_shards_in_order(self):
+        # Guards the streaming (non-accumulating) implementation: order is
+        # preserved shard-by-shard and the returned count is the row total.
+        shards = []
+        for i in range(5):
+            shards.append(self._write(f"shard-{i}-x.csv", f"id,title\n{i},row{i}\n"))
+        out = self.dir / "merged.csv"
+        n = merge_shards.merge_csv(shards, out)
+        self.assertEqual(n, 5)
+        self.assertEqual(
+            out.read_text(encoding="utf-8").splitlines(),
+            ["id,title", "0,row0", "1,row1", "2,row2", "3,row3", "4,row4"],
+        )
+
+    def test_empty_shards_produce_header_only(self):
+        # A shard with just a header (zero data rows) is valid, not a crash;
+        # the merged file should be the header alone, count 0.
+        a = self._write("shard-0-x.csv", "id,title\n")
+        b = self._write("shard-1-x.csv", "id,title\n")
+        out = self.dir / "merged.csv"
+        n = merge_shards.merge_csv([a, b], out)
+        self.assertEqual(n, 0)
+        self.assertEqual(out.read_text(encoding="utf-8").splitlines(), ["id,title"])
+
 
 class MergeJsonTests(unittest.TestCase):
     def setUp(self):
