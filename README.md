@@ -21,7 +21,8 @@ Two state machines, chained by data, not by a Step Functions call:
   detection).
 
 Part of the [Pulp Analytics](https://github.com/pulp-analytics) horror poster
-analysis project ("The Anatomy of Fear").
+analysis project, published as [What Fear Looks Like](https://pulpanalytics.com/) (working title:
+"The Anatomy of Fear").
 
 **Read [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) first** — it's explicit
 about what's real (the cost-safety tooling, both dependency graphs) versus
