@@ -7,15 +7,15 @@
       "Resource": "arn:aws:states:::ecs:runTask.sync",
       "Parameters": {
         "LaunchType": "FARGATE",
-        "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-        "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+        "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+        "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
         "NetworkConfiguration": {
           "AwsvpcConfiguration": {
             "Subnets": [
-              "subnet-034b19433f2c7cf61"
+              "REPLACE_WITH_SUBNET_ID"
             ],
             "SecurityGroups": [
-              "sg-027438978cc83fa14"
+              "REPLACE_WITH_SECURITY_GROUP_ID"
             ],
             "AssignPublicIp": "ENABLED"
           }
@@ -54,8 +54,8 @@
               "Resource": "arn:aws:states:::batch:submitJob.sync",
               "Parameters": {
                 "JobName": "fetch-alt-titles",
-                "JobQueue": "arn:aws:batch:us-east-1:833717394750:job-queue/horror-corpus-validator-queue",
-                "JobDefinition": "arn:aws:batch:us-east-1:833717394750:job-definition/horror-corpus-validator",
+                "JobQueue": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-queue/horror-corpus-validator-queue",
+                "JobDefinition": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-definition/horror-corpus-validator",
                 "ContainerOverrides": {
                   "Command.$": "States.Array('sh', '-c', States.Format('python3 scripts/05_fetch_alt_titles.py --shard-index $AWS_BATCH_JOB_ARRAY_INDEX --shard-count {} --in {} --out {}/shard-$AWS_BATCH_JOB_ARRAY_INDEX-alt_titles.json', $.shardCount, $.prunedIdsPath, $.shardDir))"
                 },
@@ -81,15 +81,15 @@
               "Resource": "arn:aws:states:::ecs:runTask.sync",
               "Parameters": {
                 "LaunchType": "FARGATE",
-                "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-                "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+                "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+                "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
                 "NetworkConfiguration": {
                   "AwsvpcConfiguration": {
                     "Subnets": [
-                      "subnet-034b19433f2c7cf61"
+                      "REPLACE_WITH_SUBNET_ID"
                     ],
                     "SecurityGroups": [
-                      "sg-027438978cc83fa14"
+                      "REPLACE_WITH_SECURITY_GROUP_ID"
                     ],
                     "AssignPublicIp": "ENABLED"
                   }
@@ -127,15 +127,15 @@
               "Resource": "arn:aws:states:::ecs:runTask.sync",
               "Parameters": {
                 "LaunchType": "FARGATE",
-                "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-                "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+                "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+                "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
                 "NetworkConfiguration": {
                   "AwsvpcConfiguration": {
                     "Subnets": [
-                      "subnet-034b19433f2c7cf61"
+                      "REPLACE_WITH_SUBNET_ID"
                     ],
                     "SecurityGroups": [
-                      "sg-027438978cc83fa14"
+                      "REPLACE_WITH_SECURITY_GROUP_ID"
                     ],
                     "AssignPublicIp": "ENABLED"
                   }
@@ -172,8 +172,8 @@
               "Resource": "arn:aws:states:::batch:submitJob.sync",
               "Parameters": {
                 "JobName": "verify-poster",
-                "JobQueue": "arn:aws:batch:us-east-1:833717394750:job-queue/horror-corpus-validator-queue",
-                "JobDefinition": "arn:aws:batch:us-east-1:833717394750:job-definition/horror-corpus-validator",
+                "JobQueue": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-queue/horror-corpus-validator-queue",
+                "JobDefinition": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-definition/horror-corpus-validator",
                 "ContainerOverrides": {
                   "Command.$": "States.Array('sh', '-c', States.Format('python3 scripts/03_verify_poster_exists.py --shard-index $AWS_BATCH_JOB_ARRAY_INDEX --shard-count {} --in {} --out {}/shard-$AWS_BATCH_JOB_ARRAY_INDEX-poster_verification.csv', $.shardCount, $.prunedIdsPath, $.shardDir))"
                 },
@@ -199,15 +199,15 @@
               "Resource": "arn:aws:states:::ecs:runTask.sync",
               "Parameters": {
                 "LaunchType": "FARGATE",
-                "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-                "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+                "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+                "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
                 "NetworkConfiguration": {
                   "AwsvpcConfiguration": {
                     "Subnets": [
-                      "subnet-034b19433f2c7cf61"
+                      "REPLACE_WITH_SUBNET_ID"
                     ],
                     "SecurityGroups": [
-                      "sg-027438978cc83fa14"
+                      "REPLACE_WITH_SECURITY_GROUP_ID"
                     ],
                     "AssignPublicIp": "ENABLED"
                   }
@@ -247,8 +247,8 @@
                       "Resource": "arn:aws:states:::batch:submitJob.sync",
                       "Parameters": {
                         "JobName": "bedrock-ocr",
-                        "JobQueue": "arn:aws:batch:us-east-1:833717394750:job-queue/horror-corpus-validator-queue",
-                        "JobDefinition": "arn:aws:batch:us-east-1:833717394750:job-definition/horror-corpus-validator",
+                        "JobQueue": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-queue/horror-corpus-validator-queue",
+                        "JobDefinition": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-definition/horror-corpus-validator",
                         "ContainerOverrides": {
                           "Command.$": "States.Array('sh', '-c', States.Format('python3 scripts/06_bedrock_ocr.py --shard-index $AWS_BATCH_JOB_ARRAY_INDEX --shard-count {} --in {} --out {}/shard-$AWS_BATCH_JOB_ARRAY_INDEX-vision_title_check.csv --verified {} --model {}', $.shardCount, $.prunedIdsPath, $.shardDir, $.verifiedPath, $.bedrockModelId))"
                         },
@@ -274,15 +274,15 @@
                       "Resource": "arn:aws:states:::ecs:runTask.sync",
                       "Parameters": {
                         "LaunchType": "FARGATE",
-                        "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-                        "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+                        "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+                        "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
                         "NetworkConfiguration": {
                           "AwsvpcConfiguration": {
                             "Subnets": [
-                              "subnet-034b19433f2c7cf61"
+                              "REPLACE_WITH_SUBNET_ID"
                             ],
                             "SecurityGroups": [
-                              "sg-027438978cc83fa14"
+                              "REPLACE_WITH_SECURITY_GROUP_ID"
                             ],
                             "AssignPublicIp": "ENABLED"
                           }
@@ -321,8 +321,8 @@
                               "Resource": "arn:aws:states:::batch:submitJob.sync",
                               "Parameters": {
                                 "JobName": "comprehend-language",
-                                "JobQueue": "arn:aws:batch:us-east-1:833717394750:job-queue/horror-corpus-validator-queue",
-                                "JobDefinition": "arn:aws:batch:us-east-1:833717394750:job-definition/horror-corpus-validator",
+                                "JobQueue": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-queue/horror-corpus-validator-queue",
+                                "JobDefinition": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-definition/horror-corpus-validator",
                                 "ContainerOverrides": {
                                   "Command.$": "States.Array('sh', '-c', States.Format('python3 scripts/07_comprehend_language.py --shard-index $AWS_BATCH_JOB_ARRAY_INDEX --shard-count {} --in {} --out {}/shard-$AWS_BATCH_JOB_ARRAY_INDEX-language_detection.csv', $.shardCount, $.visionPath, $.shardDir))"
                                 },
@@ -348,15 +348,15 @@
                               "Resource": "arn:aws:states:::ecs:runTask.sync",
                               "Parameters": {
                                 "LaunchType": "FARGATE",
-                                "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-                                "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+                                "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+                                "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
                                 "NetworkConfiguration": {
                                   "AwsvpcConfiguration": {
                                     "Subnets": [
-                                      "subnet-034b19433f2c7cf61"
+                                      "REPLACE_WITH_SUBNET_ID"
                                     ],
                                     "SecurityGroups": [
-                                      "sg-027438978cc83fa14"
+                                      "REPLACE_WITH_SECURITY_GROUP_ID"
                                     ],
                                     "AssignPublicIp": "ENABLED"
                                   }
@@ -388,8 +388,8 @@
                               "Resource": "arn:aws:states:::batch:submitJob.sync",
                               "Parameters": {
                                 "JobName": "translate-titles",
-                                "JobQueue": "arn:aws:batch:us-east-1:833717394750:job-queue/horror-corpus-validator-queue",
-                                "JobDefinition": "arn:aws:batch:us-east-1:833717394750:job-definition/horror-corpus-validator",
+                                "JobQueue": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-queue/horror-corpus-validator-queue",
+                                "JobDefinition": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-definition/horror-corpus-validator",
                                 "ContainerOverrides": {
                                   "Command.$": "States.Array('sh', '-c', States.Format('python3 scripts/08_translate_titles.py --shard-index $AWS_BATCH_JOB_ARRAY_INDEX --shard-count {} --in {} --titles {} --out {}/shard-$AWS_BATCH_JOB_ARRAY_INDEX-translated_titles.csv', $.shardCount, $.languagePath, $.prunedIdsPath, $.shardDir))"
                                 },
@@ -415,15 +415,15 @@
                               "Resource": "arn:aws:states:::ecs:runTask.sync",
                               "Parameters": {
                                 "LaunchType": "FARGATE",
-                                "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-                                "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+                                "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+                                "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
                                 "NetworkConfiguration": {
                                   "AwsvpcConfiguration": {
                                     "Subnets": [
-                                      "subnet-034b19433f2c7cf61"
+                                      "REPLACE_WITH_SUBNET_ID"
                                     ],
                                     "SecurityGroups": [
-                                      "sg-027438978cc83fa14"
+                                      "REPLACE_WITH_SECURITY_GROUP_ID"
                                     ],
                                     "AssignPublicIp": "ENABLED"
                                   }
@@ -461,15 +461,15 @@
                               "Resource": "arn:aws:states:::ecs:runTask.sync",
                               "Parameters": {
                                 "LaunchType": "FARGATE",
-                                "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-                                "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+                                "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+                                "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
                                 "NetworkConfiguration": {
                                   "AwsvpcConfiguration": {
                                     "Subnets": [
-                                      "subnet-034b19433f2c7cf61"
+                                      "REPLACE_WITH_SUBNET_ID"
                                     ],
                                     "SecurityGroups": [
-                                      "sg-027438978cc83fa14"
+                                      "REPLACE_WITH_SECURITY_GROUP_ID"
                                     ],
                                     "AssignPublicIp": "ENABLED"
                                   }
@@ -511,8 +511,8 @@
                       "Type": "Task",
                       "Resource": "arn:aws:states:::batch:submitJob.sync",
                       "Parameters": {
-                        "JobQueue": "arn:aws:batch:us-east-1:833717394750:job-queue/horror-corpus-validator-queue",
-                        "JobDefinition": "arn:aws:batch:us-east-1:833717394750:job-definition/horror-corpus-validator",
+                        "JobQueue": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-queue/horror-corpus-validator-queue",
+                        "JobDefinition": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-definition/horror-corpus-validator",
                         "ArrayProperties": {
                           "Size.$": "$.shardCount"
                         },
@@ -539,15 +539,15 @@
                       "Resource": "arn:aws:states:::ecs:runTask.sync",
                       "Parameters": {
                         "LaunchType": "FARGATE",
-                        "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-                        "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+                        "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+                        "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
                         "NetworkConfiguration": {
                           "AwsvpcConfiguration": {
                             "Subnets": [
-                              "subnet-034b19433f2c7cf61"
+                              "REPLACE_WITH_SUBNET_ID"
                             ],
                             "SecurityGroups": [
-                              "sg-027438978cc83fa14"
+                              "REPLACE_WITH_SECURITY_GROUP_ID"
                             ],
                             "AssignPublicIp": "ENABLED"
                           }
@@ -579,15 +579,15 @@
                       "Resource": "arn:aws:states:::ecs:runTask.sync",
                       "Parameters": {
                         "LaunchType": "FARGATE",
-                        "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-                        "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+                        "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+                        "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
                         "NetworkConfiguration": {
                           "AwsvpcConfiguration": {
                             "Subnets": [
-                              "subnet-034b19433f2c7cf61"
+                              "REPLACE_WITH_SUBNET_ID"
                             ],
                             "SecurityGroups": [
-                              "sg-027438978cc83fa14"
+                              "REPLACE_WITH_SECURITY_GROUP_ID"
                             ],
                             "AssignPublicIp": "ENABLED"
                           }
@@ -632,8 +632,8 @@
               "Resource": "arn:aws:states:::batch:submitJob.sync",
               "Parameters": {
                 "JobName": "poster-type-filter",
-                "JobQueue": "arn:aws:batch:us-east-1:833717394750:job-queue/horror-corpus-validator-queue",
-                "JobDefinition": "arn:aws:batch:us-east-1:833717394750:job-definition/horror-corpus-validator",
+                "JobQueue": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-queue/horror-corpus-validator-queue",
+                "JobDefinition": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-definition/horror-corpus-validator",
                 "ContainerOverrides": {
                   "Command.$": "States.Array('sh', '-c', States.Format('python3 scripts/04_filter_poster_type.py --shard-index $AWS_BATCH_JOB_ARRAY_INDEX --shard-count {} --in {} --out {}/shard-$AWS_BATCH_JOB_ARRAY_INDEX-poster_type_filter.csv', $.shardCount, $.prunedIdsPath, $.shardDir))"
                 },
@@ -659,15 +659,15 @@
               "Resource": "arn:aws:states:::ecs:runTask.sync",
               "Parameters": {
                 "LaunchType": "FARGATE",
-                "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-                "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+                "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+                "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
                 "NetworkConfiguration": {
                   "AwsvpcConfiguration": {
                     "Subnets": [
-                      "subnet-034b19433f2c7cf61"
+                      "REPLACE_WITH_SUBNET_ID"
                     ],
                     "SecurityGroups": [
-                      "sg-027438978cc83fa14"
+                      "REPLACE_WITH_SECURITY_GROUP_ID"
                     ],
                     "AssignPublicIp": "ENABLED"
                   }
@@ -700,15 +700,15 @@
               "Comment": "Re-invokes gate 4 against the now-merged --out: every id is already done (resumable skip), so this makes zero new Bedrock/Rekognition calls -- its only real job is the --rescue-out side effect (filter the merged results to is_movie_poster=False), which needs the FULL merged file, not a single shard's slice.",
               "Parameters": {
                 "LaunchType": "FARGATE",
-                "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-                "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+                "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+                "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
                 "NetworkConfiguration": {
                   "AwsvpcConfiguration": {
                     "Subnets": [
-                      "subnet-034b19433f2c7cf61"
+                      "REPLACE_WITH_SUBNET_ID"
                     ],
                     "SecurityGroups": [
-                      "sg-027438978cc83fa14"
+                      "REPLACE_WITH_SECURITY_GROUP_ID"
                     ],
                     "AssignPublicIp": "ENABLED"
                   }
@@ -746,8 +746,8 @@
               "Resource": "arn:aws:states:::batch:submitJob.sync",
               "Parameters": {
                 "JobName": "verify-celebrities",
-                "JobQueue": "arn:aws:batch:us-east-1:833717394750:job-queue/horror-corpus-validator-queue",
-                "JobDefinition": "arn:aws:batch:us-east-1:833717394750:job-definition/horror-corpus-validator",
+                "JobQueue": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-queue/horror-corpus-validator-queue",
+                "JobDefinition": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-definition/horror-corpus-validator",
                 "ContainerOverrides": {
                   "Command.$": "States.Array('sh', '-c', States.Format('python3 scripts/16_verify_celebrities.py --shard-index $AWS_BATCH_JOB_ARRAY_INDEX --shard-count {} --in {} --out {}/shard-$AWS_BATCH_JOB_ARRAY_INDEX-celebrity_verification.csv --model {}', $.shardCount, $.prunedIdsPath, $.shardDir, $.bedrockModelId))"
                 },
@@ -773,15 +773,15 @@
               "Resource": "arn:aws:states:::ecs:runTask.sync",
               "Parameters": {
                 "LaunchType": "FARGATE",
-                "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-                "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+                "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+                "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
                 "NetworkConfiguration": {
                   "AwsvpcConfiguration": {
                     "Subnets": [
-                      "subnet-034b19433f2c7cf61"
+                      "REPLACE_WITH_SUBNET_ID"
                     ],
                     "SecurityGroups": [
-                      "sg-027438978cc83fa14"
+                      "REPLACE_WITH_SECURITY_GROUP_ID"
                     ],
                     "AssignPublicIp": "ENABLED"
                   }
@@ -821,15 +821,15 @@
       "Resource": "arn:aws:states:::ecs:runTask.sync",
       "Parameters": {
         "LaunchType": "FARGATE",
-        "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-        "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+        "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+        "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
         "NetworkConfiguration": {
           "AwsvpcConfiguration": {
             "Subnets": [
-              "subnet-034b19433f2c7cf61"
+              "REPLACE_WITH_SUBNET_ID"
             ],
             "SecurityGroups": [
-              "sg-027438978cc83fa14"
+              "REPLACE_WITH_SECURITY_GROUP_ID"
             ],
             "AssignPublicIp": "ENABLED"
           }
@@ -862,15 +862,15 @@
       "Comment": "Gate 4's rescue, gate 13 half -- --in is gate 4's --rescue-out (is_movie_poster=False only, same scope as the Python orchestrator's version of this rescue).",
       "Parameters": {
         "LaunchType": "FARGATE",
-        "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-        "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+        "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+        "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
         "NetworkConfiguration": {
           "AwsvpcConfiguration": {
             "Subnets": [
-              "subnet-034b19433f2c7cf61"
+              "REPLACE_WITH_SUBNET_ID"
             ],
             "SecurityGroups": [
-              "sg-027438978cc83fa14"
+              "REPLACE_WITH_SECURITY_GROUP_ID"
             ],
             "AssignPublicIp": "ENABLED"
           }
@@ -903,15 +903,15 @@
       "Comment": "Gate 4's rescue, gate 14 half (--mode poster-type).",
       "Parameters": {
         "LaunchType": "FARGATE",
-        "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-        "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+        "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+        "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
         "NetworkConfiguration": {
           "AwsvpcConfiguration": {
             "Subnets": [
-              "subnet-034b19433f2c7cf61"
+              "REPLACE_WITH_SUBNET_ID"
             ],
             "SecurityGroups": [
-              "sg-027438978cc83fa14"
+              "REPLACE_WITH_SECURITY_GROUP_ID"
             ],
             "AssignPublicIp": "ENABLED"
           }
@@ -942,8 +942,8 @@
       "Type": "Task",
       "Resource": "arn:aws:states:::batch:submitJob.sync",
       "Parameters": {
-        "JobQueue": "arn:aws:batch:us-east-1:833717394750:job-queue/horror-corpus-validator-queue",
-        "JobDefinition": "arn:aws:batch:us-east-1:833717394750:job-definition/horror-corpus-validator",
+        "JobQueue": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-queue/horror-corpus-validator-queue",
+        "JobDefinition": "arn:aws:batch:us-east-1:REPLACE_WITH_ACCOUNT_ID:job-definition/horror-corpus-validator",
         "ArrayProperties": {
           "Size.$": "$.shardCount"
         },
@@ -970,15 +970,15 @@
       "Resource": "arn:aws:states:::ecs:runTask.sync",
       "Parameters": {
         "LaunchType": "FARGATE",
-        "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-        "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+        "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+        "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
         "NetworkConfiguration": {
           "AwsvpcConfiguration": {
             "Subnets": [
-              "subnet-034b19433f2c7cf61"
+              "REPLACE_WITH_SUBNET_ID"
             ],
             "SecurityGroups": [
-              "sg-027438978cc83fa14"
+              "REPLACE_WITH_SECURITY_GROUP_ID"
             ],
             "AssignPublicIp": "ENABLED"
           }
@@ -1010,15 +1010,15 @@
       "Resource": "arn:aws:states:::ecs:runTask.sync",
       "Parameters": {
         "LaunchType": "FARGATE",
-        "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-        "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+        "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+        "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
         "NetworkConfiguration": {
           "AwsvpcConfiguration": {
             "Subnets": [
-              "subnet-034b19433f2c7cf61"
+              "REPLACE_WITH_SUBNET_ID"
             ],
             "SecurityGroups": [
-              "sg-027438978cc83fa14"
+              "REPLACE_WITH_SECURITY_GROUP_ID"
             ],
             "AssignPublicIp": "ENABLED"
           }
@@ -1051,15 +1051,15 @@
       "Resource": "arn:aws:states:::ecs:runTask.sync",
       "Parameters": {
         "LaunchType": "FARGATE",
-        "Cluster": "arn:aws:ecs:us-east-1:833717394750:cluster/horror-corpus-smoketest",
-        "TaskDefinition": "arn:aws:ecs:us-east-1:833717394750:task-definition/horror-corpus-validator:1",
+        "Cluster": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:cluster/horror-corpus-smoketest",
+        "TaskDefinition": "arn:aws:ecs:us-east-1:REPLACE_WITH_ACCOUNT_ID:task-definition/horror-corpus-validator:1",
         "NetworkConfiguration": {
           "AwsvpcConfiguration": {
             "Subnets": [
-              "subnet-034b19433f2c7cf61"
+              "REPLACE_WITH_SUBNET_ID"
             ],
             "SecurityGroups": [
-              "sg-027438978cc83fa14"
+              "REPLACE_WITH_SECURITY_GROUP_ID"
             ],
             "AssignPublicIp": "ENABLED"
           }
